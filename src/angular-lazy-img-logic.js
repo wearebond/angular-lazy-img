@@ -28,7 +28,7 @@ angular.module('angularLazyImg').factory('LazyImgMagic', [
     winDimensions = lazyImgHelpers.getWinDimensions();
     saveWinOffsetT = lazyImgHelpers.throttle(function(){
       winDimensions = lazyImgHelpers.getWinDimensions();
-    }, 60);
+    }, 200);
     containers = [options.container || $win];
 
     function checkImages(){
@@ -42,7 +42,7 @@ angular.module('angularLazyImg').factory('LazyImgMagic', [
       if(images.length === 0){ stopListening(); }
     }
 
-    checkImagesT = lazyImgHelpers.throttle(checkImages, 30);
+    checkImagesT = lazyImgHelpers.throttle(checkImages, 200);
 
     function listen(param){
       containers.forEach(function (container) {
