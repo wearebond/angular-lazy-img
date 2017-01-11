@@ -118,7 +118,7 @@ angular.module('angularLazyImg').factory('LazyImgMagic', [
     };
 
     Photo.prototype.checkImages = function(){
-      checkImages();
+      checkImagesT();
     };
 
     Photo.addContainer = function (container) {
