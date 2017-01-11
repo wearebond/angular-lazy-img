@@ -28,7 +28,7 @@ angular.module('angularLazyImg').factory('LazyImgMagic', [
     winDimensions = lazyImgHelpers.getWinDimensions();
     saveWinOffsetT = lazyImgHelpers.throttle(function(){
       winDimensions = lazyImgHelpers.getWinDimensions();
-    }, 60);
+    }, 200);
     containers = [options.container || $win];
 
     function checkImages(){
@@ -42,7 +42,7 @@ angular.module('angularLazyImg').factory('LazyImgMagic', [
       if(images.length === 0){ stopListening(); }
     }
 
-    checkImagesT = lazyImgHelpers.throttle(checkImages, 30);
+    checkImagesT = lazyImgHelpers.throttle(checkImages, 200);
 
     function listen(param){
       containers.forEach(function (container) {
@@ -118,7 +118,7 @@ angular.module('angularLazyImg').factory('LazyImgMagic', [
     };
 
     Photo.prototype.checkImages = function(){
-      checkImages();
+      checkImagesT();
     };
 
     Photo.addContainer = function (container) {
@@ -218,10 +218,10 @@ angular.module('angularLazyImg')
       'use strict';
 
       function link(scope, element, attributes) {
-        var lazyImage = new LazyImgMagic(element);
-        attributes.$observe('lazyImg', function (newSource) {
+        var lazyImage = new LazyImgMagic(element),
+            deregister = attributes.$observe('lazyImg', function (newSource) {
           if (newSource) {
-            // in angular 1.3 it might be nice to remove observer here
+            deregister();
             lazyImage.setSource(newSource);
           }
         });
