@@ -221,7 +221,7 @@ angular.module('angularLazyImg')
         var lazyImage = new LazyImgMagic(element),
             deregister = attributes.$observe('lazyImg', function (newSource) {
           if (newSource) {
-            deregister();
+            //deregister();
             lazyImage.setSource(newSource);
           }
         });
